@@ -4,6 +4,7 @@
  */
 
 import { ElementInterface } from '../../types'
+import { detectiontype } from '../../helpers/util'
 import render from './index'
 export default function renderFigure<T>(param: any): Promise<T> | void {
   const { callback } = param
@@ -22,7 +23,7 @@ export default function renderFigure<T>(param: any): Promise<T> | void {
       }
     }
     }
-  if (callback && typeof callback === 'function') {
+  if (detectiontype(callback).fn) {
 
     render(figure, param.el, (target: any) => callback(target))
 

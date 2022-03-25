@@ -5,7 +5,7 @@
  */
 export type DefaultKeyTarget = '__key__'
 
-export type ElementType = 'figure' | 'img'
+export type ElementType = 'figure' | 'img' | 'div'
 
 export interface ImageElementInterface {
   HTMLImageElement: HTMLCollectionOf<HTMLImageElement>,
@@ -34,8 +34,11 @@ export interface ImgElementData {
 
 export interface InterfaceResolver {
   config: InterfaceConfig
+  imageElement: HTMLImageElement[]
+  maskCreateStatus: boolean
   Disorder(): void
   Ordered(): void
+  load(): void
 }
 
 export interface InterfacePrestran extends ImageElementData {

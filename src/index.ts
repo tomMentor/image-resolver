@@ -5,4 +5,5 @@
  */
 import ImageResolver from './ImageResolver'
 export * from './core'
-export default ImageResolver
+const imageResolver = ImageResolver
+export default imageResolver

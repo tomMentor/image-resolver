@@ -7,7 +7,7 @@
 
 import { ElementInterface } from '../../types'
 import { objectEventDriven } from '../../helpers/util'
-export default function render(target: ElementInterface, formerImage: HTMLImageElement, callback?: Function) {
+export default function render(target: ElementInterface, formerImage: HTMLImageElement | HTMLElement, callback?: Function) {
   if (formerImage) {
 
     const tag = document.createElement(target.type)
@@ -28,6 +28,8 @@ export default function render(target: ElementInterface, formerImage: HTMLImageE
 
     } else {
       // ...
+      formerImage.appendChild(tag)
+      callback && callback(tag)
     }
     
 

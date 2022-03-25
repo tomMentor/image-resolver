@@ -1,0 +1,33 @@
+<!--
+ * @Author: tiw
+ * @LastEditors: Please set LastEditors
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo</title>
+  <style>
+    * { padding: 0; margin: 0;}
+    p {
+      text-align: justify;
+      font-size: 10px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <p>The Intersec13tion Observer API lets code register a callback function that is executed whenever an element they wish to monitor enters or exits another element (or the viewport), or when the amount by which the two intersect changes by a requested amount. This way, sites no longer need to do anything on the main thread to watch for this kind of element intersection, and the browser is free to optimize the management of intersections as it sees fit.</p>
+  <br>
+  <p>Consider a web page that uses infinite scrolling. It uses a vendor-provided library to manage the advertisements placed periodically throughout the page, has animated graphics here and there, and uses a custom library that draws notification boxes and the like. Each of these has its own intersection detection routines, all running on the main thread. The author of the web site may not even realize this is happening, since they may know very little about the inner workings of the two libraries they are using. As the user scrolls the page, these intersection detection routines are firing constantly during the scroll handling code, resulting in an experience that leaves the user frustrated with the browser, the web site, and their computer.</p>
+  <br>
+  <p>img</p>
+  <img width="100" src="../image/seaofflowers.jpg" alt="">
+  
+  <script src="/__build__/fullscreen.js"></script>
+</body>
+</html>
+<!-- figure -->
