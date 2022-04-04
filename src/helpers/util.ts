@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-01-18 15:45:54
- * @LastEditTime: 2022-03-18 17:46:57
+ * @LastEditTime: 2022-03-28 17:42:32
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /image-resolver/src/helpers/util.ts
  */
-
+import { InterfaceImageThumbnail, ImgElementData } from '../types'
 export function objectEventDriven<T> (targetObj: T, callback: Function) {
   for (const key in targetObj) {
     if (Object.prototype.hasOwnProperty.call(targetObj, key)) {
@@ -58,3 +58,35 @@ export function oprtoc(type: string) {
   return  `[object ${type}]`
 }
 
+export function disposeThumbnail(imageElement: HTMLImageElement[]): InterfaceImageThumbnail[] {
+  return imageElement.map(item => {
+    return {
+      element: item,
+      width: item.width,
+      height: item.height,
+      src: item.src
+    }
+  })
+}
+
+export function imageSizeAdapter(current: ImgElementData, thumbnail: InterfaceImageThumbnail) {
+  
+  if (thumbnail.width > thumbnail.height) {
+    
+    current.imageElement.style.width = '100%'
+    current.imageElement.style.height = ''
+
+  } else {
+    
+    current.imageElement.style.height = '100%'
+    current.imageElement.style.width = ''
+
+  }
+
+  current.imageElement.style.position = 'absolute'
+  current.imageElement.style.top = '50%'
+  current.imageElement.style.left = '50%'
+  current.imageElement.style.transform = 'translate3d(-50%, -50%, 0)'
+
+
+}

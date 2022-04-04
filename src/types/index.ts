@@ -7,6 +7,8 @@ export type DefaultKeyTarget = '__key__'
 
 export type ElementType = 'figure' | 'img' | 'div'
 
+export type ElementAttribute = HTMLImageElement | HTMLElement | HTMLDivElement
+
 export interface ImageElementInterface {
   HTMLImageElement: HTMLCollectionOf<HTMLImageElement>,
   imageElement: HTMLImageElement[]
@@ -20,6 +22,7 @@ export interface ElementInterface {
   }
 }
 
+
 export interface ImageElementData {
   imageElement: HTMLImageElement,
   dataSrc: string,
@@ -31,6 +34,7 @@ export interface ImgElementData {
   height: number
   status?: boolean
 }
+
 
 export interface InterfaceResolver {
   config: InterfaceConfig
@@ -57,3 +61,18 @@ export interface ImagesReturn {
   error?(param: ImgElementData): void
 }
 
+
+export interface InterfaceRenderImagsOptions {
+  parentNode: HTMLElement,
+  parentNodeAttribute: {
+    width: number,
+    height: number
+  }
+}
+
+export interface InterfaceImageThumbnail {
+  element: HTMLImageElement,
+  src: string,
+  width: number,
+  height: number
+}

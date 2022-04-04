@@ -6,24 +6,37 @@
 import { 
   ImageElementInterface, 
   InterfaceConfig,
-  ElementType
+  ElementType,
+  ElementAttribute,
+  InterfaceImageThumbnail
 } from '../types'
+import { InterfaceCurrentPreviewImage } from '../types/fullscreen'
 import defaultConfig from '../default'
 import scan from './scan'
 import imageCollection from './picture/imageCollection'
 import render from '../core/render'
 import { renderMaskLayer } from '../core/render/renderMaskLayer'
+import renderImags from '../core/render/renderImage'
+import fullscreene from './fullscreen' 
 class Resolver {
 
   config: InterfaceConfig
   imageElement: HTMLImageElement[]
   maskCreateStatus: boolean
+  maskBox: ElementAttribute | null
+  currentPreviewImage: InterfaceCurrentPreviewImage
+  currentImageIndex: number
+  thumbnailCollection: InterfaceImageThumbnail[]
 
   constructor() {
 
     this.config = { ...defaultConfig }
     this.imageElement = []
     this.maskCreateStatus = false
+    this.maskBox = null
+    this.currentPreviewImage = { index: 0, src: undefined }
+    this.currentImageIndex = 0
+    this.thumbnailCollection = []
 
     this.searchingImg()
     
@@ -51,51 +64,64 @@ class Resolver {
     this.scan(this.config)
   }
   load() {
-    const { fullscreen } = this.config
-    if (fullscreen) {
-
+    const config = this.config
+    config.fullscreen && fullscreene(this.imageElement, this.config)
+    // const { fullscreen } = this.config
+    // if (fullscreen) {
+      
       // Create Mask Layer
       // this.createMaskLayer()
 
+      
+      // const thumbnailInfo: InterfaceImageThumbnail[] = this.disposeImageColl(this.imageElement)
+      // this.thumbnailCollection = thumbnailInfo
       // 全屏预览
-      this.Fullscreen(this.imageElement)
+      // this.Fullscreen(thumbnailInfo)
 
-    }
+    // }
     
   }
   // 全屏预览
-  Fullscreen(imageElement: HTMLImageElement[]): HTMLImageElement[] {
-    return imageElement.map((item: HTMLImageElement, i: number) => {
-      item.onclick = () => {
-        console.log(i, item)
-        this.createMaskLayer()
+  Fullscreen(imageElement: InterfaceImageThumbnail[]) {
+    imageElement.map((item: InterfaceImageThumbnail, i: number) => {
+      const element = item.element
+      element.onclick = () => {
+        this.createMaskLayer(item, i)
+        this.currentImageIndex = i
+        this.currentPreviewImage = { index: i, src: item.src }
       }
       return item
     })
   }
+  
   // Creatae Mask layer
-  createMaskLayer() {
+  async createMaskLayer(img: any, i: number) {
     
-    if (!this.maskCreateStatus) {
-      
-      // 创建一个空的对象
-      render({ type: 'div' }, document.body, (target: ElementType) => {
-        
-        renderMaskLayer({
-          element: target,
-          callback: (target: ElementType) => {
-        
-            this.maskCreateStatus = !!target
-          
-          }
-        })
-      })
+    let maskLayer = null
 
+    if (!this.maskCreateStatus) {
+ 
+
+      // Create Image
+      // console.log(currentImage.width, currentImage.height)
+      // renderImags(currentImage.src, {
+      //   parentNode: mask
+      // })
+      // console.log(this.currentPreviewImage)
+      // const cuttentImage = await renderMaskLayer({ element: mask })
+      // mask.appendChild(this.currentPreviewImage.el!)
       
+      // this.maskCreateStatus = !!mask
 
     } else {
       // ....
+      this.maskBox && (this.maskBox.style.display = 'block')
     }
+
+    const currentImage = this.thumbnailCollection[this.currentImageIndex]
+    // renderImags(currentImage.src, {
+    //   parentNode: maskLayer
+    // })
   }
 }
 export default Resolver

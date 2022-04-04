@@ -5,37 +5,37 @@
  * @Description: 
  */
 
-import { ElementInterface } from '../../types'
-import { objectEventDriven } from '../../helpers/util'
-export default function render(target: ElementInterface, formerImage: HTMLImageElement | HTMLElement, callback?: Function) {
-  if (formerImage) {
+import { ElementInterface, ElementAttribute } from '../../types'
+import { objectEventDriven, detectiontype } from '../../helpers/util'
 
-    const tag = document.createElement(target.type)
+export default function render(target: ElementInterface, formerImage: HTMLImageElement | HTMLElement, callback?: Function): Promise<ElementAttribute> {
 
-    const targetStyle = target.props?.style
+  const tag = document.createElement(target.type)
+  const targetStyle = target.props?.style
 
-    // 对象事件骚动
-    objectEventDriven(targetStyle, (data: any) => {
-      tag.style[data.key] = data.value
-    })
-    if (target.render === 'insertBefore') {
-      
-      // formerImage.parentNode 旧图片父节点元素
-      // 将 tag 插入到 formerImage[ 原本位置之前 ]
-      formerImage.parentNode?.insertBefore(tag, formerImage)
+  // 对象事件驱动
+  objectEventDriven(targetStyle, (data: any) => {
+    tag.style[data.key] = data.value
+  })
 
-      callback && callback(tag)
+  if (target.render === 'insertBefore') {
+    formerImage.parentNode?.insertBefore(tag, formerImage)
+  } else {
+    formerImage.appendChild(tag)
+  }
 
-    } else {
-      // ...
-      formerImage.appendChild(tag)
-      callback && callback(tag)
-    }
-    
+  if (callback && detectiontype(callback).fn) {
+
+    callback(tag)
 
   } else {
-    // ...
+
+    // ....
 
   }
+
+  return new Promise((relove) => {
+    relove(tag)
+  })
 
 }

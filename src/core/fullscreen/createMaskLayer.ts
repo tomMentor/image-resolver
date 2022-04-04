@@ -1,14 +1,13 @@
 /*
  * @Author: Tom
- * @Date: 2022-03-18 11:54:05
+ * @Date: 2022-03-28 15:21:07
  * @LastEditors: Please set LastEditors
- * @Description: Create Mask layer
+ * @Description: Create mask layer
  */
-import { detectiontype } from '../../helpers/util'
-import { ElementInterface, ElementType } from '../../types'
-import render from './index'
-export async function renderMaskLayer(param: any) {
-  // callback: Function
+import { ElementAttribute, ElementInterface } from '../../types'
+import render from '../render'
+export default function createMaskLayer(param: any) {
+
   const maskLayer: ElementInterface = {
     type: 'div',
     props: {
@@ -24,4 +23,6 @@ export async function renderMaskLayer(param: any) {
     }
 
     return render(maskLayer, param.element || document.body)
+
 }
+

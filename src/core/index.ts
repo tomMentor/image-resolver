@@ -5,4 +5,5 @@
  */
 import Images from './picture'
 import usePrestrain from './prestrain'
-export { Images, usePrestrain }
+import fullscreen from './fullscreen'
+export { Images, usePrestrain, fullscreen }
