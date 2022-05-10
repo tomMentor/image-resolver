@@ -1,13 +1,13 @@
 /*
  * @Author: Tom
  * @Date: 2022-01-20 16:36:38
- * @LastEditors: 
+ * @LastEditors: Please set LastEditors
  * @Description: 
  */
 
-import Resolver from './core/resolver'
+import Resolver from './core'
 import { InterfaceResolver } from './types'
-function createImageResolver(): InterfaceResolver {
+function createImageResolver() {
   const resolver = new Resolver()
   return resolver
 }

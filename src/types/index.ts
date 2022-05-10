@@ -9,11 +9,6 @@ export type ElementType = 'figure' | 'img' | 'div'
 
 export type ElementAttribute = HTMLImageElement | HTMLElement | HTMLDivElement
 
-export interface ImageElementInterface {
-  HTMLImageElement: HTMLCollectionOf<HTMLImageElement>,
-  imageElement: HTMLImageElement[]
-}
-
 export interface ElementInterface {
   type: ElementType,
   render?: string,

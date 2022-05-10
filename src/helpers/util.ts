@@ -1,10 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-01-18 15:45:54
- * @LastEditTime: 2022-03-28 17:42:32
+ * @LastEditTime: 2022-05-07 14:35:24
  * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: /image-resolver/src/helpers/util.ts
  */
 import { InterfaceImageThumbnail, ImgElementData } from '../types'
 export function objectEventDriven<T> (targetObj: T, callback: Function) {
@@ -89,4 +87,18 @@ export function imageSizeAdapter(current: ImgElementData, thumbnail: InterfaceIm
   current.imageElement.style.transform = 'translate3d(-50%, -50%, 0)'
 
 
+}
+
+/**
+ * @description: 对象属性分配
+ * @param {*}
+ * @return {*}
+ */
+export function objdctPropertyAllocation<T>(El: T, to: string, resources: Object) {
+  for (const key in resources) {
+    if (Object.prototype.hasOwnProperty.call(resources, key)) {
+      const element = resources[key]
+      El[to][key] = element
+    }
+  }
 }
