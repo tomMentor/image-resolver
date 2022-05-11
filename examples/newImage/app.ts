@@ -5,4 +5,5 @@
  * @Description: 
  */
 import imageResolver from '../../src'
+imageResolver.config.orderly = true
 imageResolver.load()

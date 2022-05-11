@@ -15,6 +15,7 @@ export default function createFigure(imageElement: HTMLImageElement): Promise<HT
   let height = imageElement.height || imageElement.dataset.height
   const [ w, h] = removeAssignCharacter([width, height], 'px')
   const styleColl = {
+    
     margin: '0',
     padding: '0',
     marginBlockStart: '0',
@@ -26,8 +27,9 @@ export default function createFigure(imageElement: HTMLImageElement): Promise<HT
     background: `#eee`,
     overflow: 'hidden',
     position: 'relative',
-    transition: 'all 1s',
+    transition: 'all 0.3s',
     opacity: '0'
+    
   }
 
   return new Promise((reslove) => {

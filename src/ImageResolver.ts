@@ -7,7 +7,7 @@
 
 import Resolver from './core'
 import { InterfaceResolver } from './types'
-function createImageResolver() {
+function createImageResolver(): InterfaceResolver {
   const resolver = new Resolver()
   return resolver
 }

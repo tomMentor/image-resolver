@@ -3,39 +3,30 @@
  * @LastEditors: Please set LastEditors
  * @Description: 解释器
  */
-
-import { ImagesReturn } from '../types/index'
+import { InterfaceResolver, InterfaceConfig } from '../types/index'
+import { defaultConfig } from '../default'
 import { imageCollection } from '../helpers/image'
-import { createFigure, createProgressBar } from '../element'
-import useImage from './picture'
+import load from './load'
 
-class Resolver {
-  bb: number
+class Resolver implements InterfaceResolver {
+
+  imageElement: Array<HTMLImageElement>
+  config: InterfaceConfig
+
   constructor() {
-    this.bb = 0
+
+    this.config = defaultConfig
+    this.imageElement = imageCollection()
   }
 
   public load() {
-    const collImg = imageCollection()
-    this.collectionDispose(collImg)
+
+    load(this.imageElement, this.config)
 
   }
-
-  collectionDispose(coll: Array<HTMLImageElement>) {
-    return coll.map((img: HTMLImageElement) => {
-      this.disposeItemImg(img)
-    })
+  public lazyload() {
+    
   }
-
- async disposeItemImg(img: HTMLImageElement) {
-   
-  const figure = await createFigure(img)
-
-  useImage(img, figure)
- 
-  }
-
-  
 
 }
 export default Resolver
